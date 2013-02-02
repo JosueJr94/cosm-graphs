@@ -11,7 +11,7 @@ function getImageUrl(klass) {
 }
 
 function updateGraphs() {
-    $('img').each(function() {
+    $('#graphs img').each(function() {
         var $self = $(this);
         $self.attr('src', getImageUrl($self.attr('class')));
     });
@@ -19,6 +19,18 @@ function updateGraphs() {
 }
 
 $(function() {
+    // Draw Graphs
     updateGraphs();
     setInterval(updateGraphs, 60 * 1000);
+    // Toggle Ruler
+    $(window).keydown(function(e) {
+        if (e.keyCode == 82) {
+            $('#ruler').toggle();
+        }
+    });
+    // Draw Ruler
+    $('body').mousemove(function(e) {
+        var offset = $('#graphs').offset();
+        $('#ruler').css('left', e.pageX - offset.left);
+    });
 });

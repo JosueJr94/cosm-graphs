@@ -1,4 +1,27 @@
 #container {
     width: 1000px;
     margin: 0 auto;
+    position: relative;
+}
+
+#ruler {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#ruler table {
+    width: 800px;
+    height: 100%;
+    border-collapse: collapse;
+}
+
+#ruler td {
+    width: 160px;
+    height: 100%;
+    padding: 0;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(0, 192, 0, 0.5);
 }
