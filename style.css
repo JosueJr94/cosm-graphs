@@ -1,5 +1,5 @@
 #container {
-    width: 1000px;
+    width: 1100px;
     margin: 0 auto;
     position: relative;
 }
@@ -24,4 +24,12 @@
     border-style: solid;
     border-width: 1px;
     border-color: rgba(0, 192, 0, 0.5);
+}
+
+.graph {
+    align: left;
+}
+
+#tmp-canvas {
+    display: none;
 }

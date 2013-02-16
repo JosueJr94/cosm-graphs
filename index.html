@@ -8,26 +8,21 @@
   </head>
   <body>
     <div id="container">
-      <div id="graphs">
-        <a href="https://cosm.com/feeds/89487">
-          <img class="temperature" src="" /><br />
-          <img class="humidity" src="" /><br />
-          <img class="pressure" src="" /><br />
-          <img class="tremor" src="" /><br />
-          <img class="sound-level" src="" /><br />
-        </a>
+      <p>room</p>
+      <canvas id="room-graphs" width="1000" height="180" ></canvas>
+      <p>bed</p>
+      <canvas id="bed-graphs" width="1000" height="180" ></canvas>
+      <p>all</p>
+      <div>
+        <img id="temperature" class="graph" width="500px" />
+        <img id="humidity" class="graph" width="500px" />
+        <img id="pressure" class="graph" width="500px" />
       </div>
-      <div id="ruler">
-        <table>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </table>
+      <div>
+        <img id="tremor" class="graph" width="500px" />
+        <img id="sound-level" class="graph" width="500px" />
       </div>
     </div>
+    <canvas id="tmp-canvas" width="1000" height="180" ></canvas>
   </body>
 </html>
