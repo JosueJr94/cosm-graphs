@@ -8,19 +8,30 @@
   </head>
   <body>
     <div id="container">
+      <div>
+        <a href="https://cosm.com/feeds/89487" target="_blank">Cosm Graphs</a>
+        <select id="duration">
+          <option value="9hours" selected>9hours</option>
+          <option value="8hours">8hours</option>
+          <option value="6hours">6hours</option>
+          <option value="1day">1day</option>
+          <option value="1week">1week</option>
+          <option value="1month">1month</option>
+        </select>
+      </div>
       <p>room</p>
       <canvas id="room-graphs" width="1000" height="180" ></canvas>
       <p>bed</p>
       <canvas id="bed-graphs" width="1000" height="180" ></canvas>
       <p>all</p>
       <div>
-        <img id="temperature" class="graph" width="500px" />
-        <img id="humidity" class="graph" width="500px" />
-        <img id="pressure" class="graph" width="500px" />
+        <img id="temperature" class="graph" />
+        <img id="humidity" class="graph" />
+        <img id="pressure" class="graph" />
       </div>
       <div>
-        <img id="tremor" class="graph" width="500px" />
-        <img id="sound-level" class="graph" width="500px" />
+        <img id="tremor" class="graph" />
+        <img id="sound-level" class="graph" />
       </div>
     </div>
     <canvas id="tmp-canvas" width="1000" height="180" ></canvas>

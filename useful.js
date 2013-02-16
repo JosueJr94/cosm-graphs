@@ -1,10 +1,12 @@
 function getImagePath(klass) {
+    var duration = $('#duration').val();
+
     var urls = {
-        'temperature':'/v2/feeds/89487/datastreams/temperature.png?width=1000&height=180&colour=%23ff0000&duration=9hours&title=Temperature&stroke_size=1&show_axis_labels=true&detailed_grid=true&scale=manual&min=15&max=25&timezone=Tokyo',
-        'humidity':'/v2/feeds/89487/datastreams/humidity.png?width=1000&height=180&colour=%230000ff&duration=9hours&title=Humidity&stroke_size=1&show_axis_labels=true&detailed_grid=true&scale=manual&min=30&max=60&timezone=Tokyo',
-        'pressure':'/v2/feeds/89487/datastreams/pressure.png?width=1000&height=180&colour=%2300ff00&duration=9hours&title=Pressure&stroke_size=1&show_axis_labels=true&detailed_grid=true&scale=manual&min=99000&max=104000&timezone=Tokyo',
-        'tremor':'/v2/feeds/89487/datastreams/bed-tremor.png?width=1000&height=180&colour=%23ff0000&duration=9hours&title=Tremor&stroke_size=1&show_axis_labels=true&detailed_grid=true&scale=manual&min=0.0&max=0.30&timezone=Tokyo',
-        'sound-level':'/v2/feeds/89487/datastreams/bed-sound-level.png?width=1000&height=180&colour=%230000ff&duration=9hours&title=Sound%20Level&stroke_size=1&show_axis_labels=true&detailed_grid=true&scale=manual&min=23&max=33&timezone=Tokyo',
+        'temperature':'/v2/feeds/89487/datastreams/temperature.png?width=1000&height=180&colour=%23ff0000&duration=' + duration + '&title=Temperature&stroke_size=1&show_axis_labels=true&detailed_grid=true&scale=manual&min=15&max=25&timezone=Tokyo',
+        'humidity':'/v2/feeds/89487/datastreams/humidity.png?width=1000&height=180&colour=%230000ff&duration=' + duration + '&title=Humidity&stroke_size=1&show_axis_labels=true&detailed_grid=true&scale=manual&min=30&max=60&timezone=Tokyo',
+        'pressure':'/v2/feeds/89487/datastreams/pressure.png?width=1000&height=180&colour=%2300ff00&duration=' + duration + '&title=Pressure&stroke_size=1&show_axis_labels=true&detailed_grid=true&scale=manual&min=99000&max=104000&timezone=Tokyo',
+        'tremor':'/v2/feeds/89487/datastreams/bed-tremor.png?width=1000&height=180&colour=%23ff0000&duration=' + duration + '&title=Tremor&stroke_size=1&show_axis_labels=true&detailed_grid=true&scale=manual&min=0.0&max=0.30&timezone=Tokyo',
+        'sound-level':'/v2/feeds/89487/datastreams/bed-sound-level.png?width=1000&height=180&colour=%230000ff&duration=' + duration + '&title=Sound%20Level&stroke_size=1&show_axis_labels=true&detailed_grid=true&scale=manual&min=23&max=33&timezone=Tokyo',
     };
     var timestamp = new Date().getTime();
     return urls[klass] + '&dummy=' + timestamp;
@@ -43,6 +45,14 @@ function updateGraphs(canvas, ctx, tmp_canvas, ctx2) {
 
     var tmp_canvas = document.getElementById('tmp-canvas');
     var ctx2 = tmp_canvas.getContext('2d');
+
+    var clear = function(canvas) {
+        var ctx = canvas.getContext('2d');
+        if (!ctx)
+            throw 'failed to get 2d context';
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    };
 
     var draw = function(canvas, image, x, y) {
         var ctx = canvas.getContext('2d');
@@ -87,20 +97,27 @@ function updateGraphs(canvas, ctx, tmp_canvas, ctx2) {
          loadImage('humidity'),
          loadImage('pressure')
     ).done(function(temperature, humidity, pressure) {
-        draw(room_graphs, temperature, 0, 0);
-        draw(room_graphs, humidity, 0, 0);
+        clear(room_graphs);
         draw(room_graphs, pressure, -32, 0);
+        draw(room_graphs, humidity, 0, 0);
+        draw(room_graphs, temperature, 0, 0);
     });
 
     $.when(
          loadImage('tremor'),
          loadImage('sound-level')
     ).done(function(tremor, sound_level) {
-        draw(bed_graphs, sound_level, 0, 0);
+        clear(bed_graphs);
         draw(bed_graphs, tremor, -10, 0);
+        draw(bed_graphs, sound_level, 0, 0);
     });
 }
 
 $(function() {
+    $('#duration').on('change', function() {
+        updateGraphs();
+    });
+
     updateGraphs();
+    setInterval(updateGraphs, 60 * 1000);
 });
