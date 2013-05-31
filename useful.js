@@ -2,7 +2,7 @@ function getImagePath(klass) {
     var duration = $('#duration').val();
 
     var urls = {
-        'temperature':'/v2/feeds/89487/datastreams/temperature.png?width=1000&height=180&colour=%23ff0000&duration=' + duration + '&title=Temperature&stroke_size=1&show_axis_labels=true&detailed_grid=true&scale=manual&min=15&max=25&timezone=Tokyo',
+        'temperature':'/v2/feeds/89487/datastreams/temperature.png?width=1000&height=180&colour=%23ff0000&duration=' + duration + '&title=Temperature&stroke_size=1&show_axis_labels=true&detailed_grid=true&scale=manual&min=15&max=35&timezone=Tokyo',
         'humidity':'/v2/feeds/89487/datastreams/humidity.png?width=1000&height=180&colour=%230000ff&duration=' + duration + '&title=Humidity&stroke_size=1&show_axis_labels=true&detailed_grid=true&scale=manual&min=30&max=60&timezone=Tokyo',
         'pressure':'/v2/feeds/89487/datastreams/pressure.png?width=1000&height=180&colour=%2300ff00&duration=' + duration + '&title=Pressure&stroke_size=1&show_axis_labels=true&detailed_grid=true&scale=manual&min=99000&max=104000&timezone=Tokyo',
         'tremor':'/v2/feeds/89487/datastreams/bed-tremor.png?width=1000&height=180&colour=%23ff0000&duration=' + duration + '&title=Tremor&stroke_size=1&show_axis_labels=true&detailed_grid=true&scale=manual&min=0.0&max=0.30&timezone=Tokyo',
